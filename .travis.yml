@@ -1,13 +1,16 @@
-sudo: required
 jdk:
 - openjdk8
 services:
 - docker
 branches:
   only:
-  - master  
-install:
-- sudo apt-get -qq update
+  - master
+  - dsl2
+jobs:
+  include:
+    - if: branch = dsl2
+      env: NXF_VER=19.09.0-edge
+before_install:
 - sudo apt-get -qq -y install graphviz realpath
 - sudo pip install awscli
 before_script:
